@@ -1,0 +1,24 @@
+# Same attack suite, pointed at the hardened target. Comparing this run's
+# table against mia_overfit.yaml's is the Phase 2/3 headline result.
+extends: base.yaml
+target_run_name: target_regularized
+
+model:
+  name: simple_cnn
+  dropout: 0.3
+
+train:
+  epochs: 60
+  lr: 0.001
+  weight_decay: 0.0005
+  early_stopping_patience: 5
+
+shadow:
+  num_shadows: 8
+  shadow_train_size: 8000
+  classifier: random_forest
+
+lira:
+  num_shadows: 16
+  in_fraction: 0.5
+  variance_mode: global

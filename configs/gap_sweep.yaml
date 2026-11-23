@@ -1,0 +1,26 @@
+# Phase 2 experiment: generalization gap vs attack success.
+#
+# Grid size = len(epochs) * len(train_sizes) * len(seeds) models. The values
+# below are 3*3*3 = 27 small models — comfortable on a Colab GPU, slow on CPU.
+# Trim `seeds` to [0] for a quick look, but the aggregated plot then loses its
+# error bars.
+extends: base.yaml
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  lr: 0.001
+  weight_decay: 0.0
+
+sweep:
+  epochs: [5, 20, 60]
+  # Smaller training sets overfit harder, so this axis sweeps leakage too.
+  train_sizes: [2000, 5000, 10000]
+  seeds: [0, 1, 2]
+
+data:
+  # Shrunk so that (2 * max(train_sizes)) + these still fits in the 60k pool.
+  shadow_pool_size: 20000
+  attacker_aux_size: 5000

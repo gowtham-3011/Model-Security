@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Downloaded dataset cache — large, regenerable from data.py.
+data/
+
+# Large generated binaries — regenerable by re-running experiments/.
+results/checkpoints/
+results/logits/
+*.pt
+*.npz
+
+# Small generated artifacts (results/metrics/*.json, results/plots/*.png,
+# results/tables/*.csv) are intentionally NOT ignored — they're what makes
+# this a portfolio project instead of just code.
+
+.ipynb_checkpoints/
+.DS_Store

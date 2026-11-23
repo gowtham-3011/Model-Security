@@ -1,0 +1,21 @@
+# CPU PILOT of gap_sweep.yaml: 2 epoch settings x 2 training-set sizes x 1 seed = 4 small models instead of 27.
+# One seed means no error bars: each point is a single training run. Treat it as a direction, not a measurement.
+extends: base.yaml
+
+data:
+  shadow_pool_size: 5000
+  attacker_aux_size: 1000
+  num_workers: 0
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  lr: 0.001
+  weight_decay: 0.0
+
+sweep:
+  epochs: [5, 15]
+  train_sizes: [500, 1500]
+  seeds: [0]

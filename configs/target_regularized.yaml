@@ -1,0 +1,16 @@
+# Hardened target: weight decay + dropout + early stopping (the three
+# mechanisms Phase 1 asks for). Label smoothing and augmentation are held
+# back for Phase 6, where they're introduced as separate, individually
+# measurable defenses rather than being baked in here.
+extends: base.yaml
+run_name: target_regularized
+
+model:
+  name: simple_cnn
+  dropout: 0.3
+
+train:
+  epochs: 60
+  lr: 0.001
+  weight_decay: 0.0005
+  early_stopping_patience: 5

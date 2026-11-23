@@ -1,0 +1,62 @@
+# Phase 6: the full defense sweep. This is the most expensive config in the
+# lab — it retrains a model for every cheap defense and every epsilon.
+extends: base.yaml
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  epochs: 60
+  lr: 0.001
+
+defenses:
+  # Which cheap-defense variant is the "no defense" baseline. Output hardening
+  # is applied on top of this model, since hardening needs no retraining.
+  undefended_name: undefended
+
+  cheap:
+    - name: undefended
+      epochs: 60
+    - name: weight decay (5e-4)
+      epochs: 60
+      weight_decay: 0.0005
+    - name: dropout (0.3)
+      epochs: 60
+      dropout: 0.3
+    - name: label smoothing (0.1)
+      epochs: 60
+      label_smoothing: 0.1
+    - name: early stopping (patience 5)
+      epochs: 60
+      early_stopping_patience: 5
+    - name: all cheap defenses
+      epochs: 60
+      weight_decay: 0.0005
+      dropout: 0.3
+      label_smoothing: 0.1
+      early_stopping_patience: 5
+
+  hardening:
+    - name: "hardening: top-1 label only"
+      mode: label
+    - name: "hardening: top-3 truncation"
+      top_k: 3
+    - name: "hardening: confidences rounded (2dp)"
+      round_digits: 2
+
+  # epsilon=inf is the non-private baseline; keeping it in the same list means
+  # the sweep plot treats "no DP" as just another point on the axis.
+  epsilons: [1, 3, 8, 20, inf]
+  # DP-SGD converges differently from standard training: fewer epochs (noise
+  # accumulates with each one, so more epochs means more noise per step for a
+  # fixed epsilon) and a higher learning rate to compensate for clipped grads.
+  dp_epochs: 20
+  dp_lr: 0.002
+  max_grad_norm: 1.0
+
+  extraction_query_budget: 10000
+  surrogate_model:
+    name: small_resnet
+  surrogate_epochs: 20
+  surrogate_lr: 0.001

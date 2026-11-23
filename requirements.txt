@@ -1,0 +1,16 @@
+# Loose (>=) version bounds on purpose: Colab ships its own pinned torch/CUDA
+# build, and forcing an exact torch== version here would trigger a slow,
+# often broken, reinstall. Pin exact versions only if you hit a real
+# incompatibility.
+torch>=2.1
+torchvision>=0.16
+opacus>=1.4
+scikit-learn>=1.3
+numpy>=1.24
+pandas>=2.0
+matplotlib>=3.7
+scipy>=1.11
+streamlit>=1.28
+pytest>=7.4
+PyYAML>=6.0
+tqdm>=4.66

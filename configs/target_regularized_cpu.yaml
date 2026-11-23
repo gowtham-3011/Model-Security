@@ -1,0 +1,20 @@
+# CPU PILOT version of target_regularized.yaml (scaled down exactly like target_overfit_cpu.yaml).
+extends: base.yaml
+run_name: target_regularized_cpu
+
+data:
+  target_train_size: 2000
+  target_holdout_size: 2000
+  shadow_pool_size: 5000
+  attacker_aux_size: 2000
+  num_workers: 0
+
+model:
+  name: simple_cnn
+  dropout: 0.3
+
+train:
+  epochs: 30
+  lr: 0.001
+  weight_decay: 0.0005
+  early_stopping_patience: 5

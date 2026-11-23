@@ -1,0 +1,33 @@
+{
+  "target_run": "target_regularized_cpu",
+  "attacks": [
+    {
+      "attack": "threshold (loss)",
+      "auc": 0.6862714999999999,
+      "n_members": 2000,
+      "n_nonmembers": 2000,
+      "tpr_at_fpr_0.01": 0.0165,
+      "tpr_at_fpr_0.001": 0.002,
+      "threshold": -1.1145570278167725,
+      "balanced_accuracy": 0.65325,
+      "auc_ci_low": 0.6701281875,
+      "auc_ci_high": 0.7022086000000001,
+      "tpr_at_fpr_0.001_ci_low": 0.0005,
+      "tpr_at_fpr_0.001_ci_high": 0.0055
+    },
+    {
+      "attack": "threshold (confidence)",
+      "auc": 0.6862714999999999,
+      "n_members": 2000,
+      "n_nonmembers": 2000,
+      "tpr_at_fpr_0.01": 0.0165,
+      "tpr_at_fpr_0.001": 0.002,
+      "threshold": 0.3280605673789978,
+      "balanced_accuracy": 0.65325,
+      "auc_ci_low": 0.6701281875,
+      "auc_ci_high": 0.7022086000000001,
+      "tpr_at_fpr_0.001_ci_low": 0.0005,
+      "tpr_at_fpr_0.001_ci_high": 0.0055
+    }
+  ]
+}

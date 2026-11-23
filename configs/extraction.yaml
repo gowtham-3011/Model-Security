@@ -1,0 +1,18 @@
+# Phase 5: model extraction against the overfit target.
+extends: base.yaml
+target_run_name: target_overfit
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+extraction:
+  # CIFAR-100's train split has 50,000 images, so 50k is the ceiling here.
+  query_budgets: [1000, 5000, 10000, 25000, 50000]
+  # A *different* architecture from the target on purpose: a real attacker
+  # doesn't know the victim's architecture, and extraction still works, which
+  # is part of what makes it a practical threat.
+  surrogate_model:
+    name: small_resnet
+  surrogate_epochs: 30
+  surrogate_lr: 0.001

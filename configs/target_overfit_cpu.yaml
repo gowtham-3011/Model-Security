@@ -1,0 +1,22 @@
+# CPU PILOT version of target_overfit.yaml (see README "CPU pilot"). Same recipe, scaled down so it runs in
+# minutes on a CPU: 2,000 training members instead of 8,000, 30 epochs instead of 60, and num_workers 0
+# (Windows DataLoader worker processes were respawned every epoch and stalled the run).
+extends: base.yaml
+run_name: target_overfit_cpu
+
+data:
+  target_train_size: 2000
+  target_holdout_size: 2000
+  shadow_pool_size: 5000
+  attacker_aux_size: 2000
+  num_workers: 0
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  epochs: 30
+  lr: 0.001
+  weight_decay: 0.0
+  early_stopping_patience: null

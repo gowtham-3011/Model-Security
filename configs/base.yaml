@@ -1,0 +1,20 @@
+# Shared defaults. Other configs pull this in via `extends: base.yaml` and
+# override only what differs (their model/train section, run_name, ...).
+seed: 42
+
+data:
+  data_dir: ./data
+  # Sizes are chosen so the four splits sum to exactly 60,000 = all of
+  # CIFAR-10 (50k train + 10k test combined into one pool). member/holdout
+  # are equal size on purpose: MIA evaluation must be class-balanced
+  # (Section 5 rule) or AUC/TPR numbers are meaningless.
+  target_train_size: 8000     # target model's members
+  target_holdout_size: 8000   # non-members, never trained on
+  shadow_pool_size: 34000     # pool shadow models (Phase 3) draw from
+  attacker_aux_size: 10000    # attacker's calibration data (Phase 2)
+  num_workers: 2
+
+train:
+  batch_size: 128
+
+results_dir: ./results

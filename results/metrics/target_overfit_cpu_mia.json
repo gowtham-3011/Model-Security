@@ -1,0 +1,33 @@
+{
+  "target_run": "target_overfit_cpu",
+  "attacks": [
+    {
+      "attack": "threshold (loss)",
+      "auc": 0.86865225,
+      "n_members": 2000,
+      "n_nonmembers": 2000,
+      "tpr_at_fpr_0.01": 0.013,
+      "tpr_at_fpr_0.001": 0.002,
+      "threshold": -0.04302988201379776,
+      "balanced_accuracy": 0.86825,
+      "auc_ci_low": 0.85505935625,
+      "auc_ci_high": 0.88130965625,
+      "tpr_at_fpr_0.001_ci_low": 0.0,
+      "tpr_at_fpr_0.001_ci_high": 0.0045
+    },
+    {
+      "attack": "threshold (confidence)",
+      "auc": 0.86865225,
+      "n_members": 2000,
+      "n_nonmembers": 2000,
+      "tpr_at_fpr_0.01": 0.013,
+      "tpr_at_fpr_0.001": 0.002,
+      "threshold": 0.9578827619552612,
+      "balanced_accuracy": 0.86825,
+      "auc_ci_low": 0.85505935625,
+      "auc_ci_high": 0.88130965625,
+      "tpr_at_fpr_0.001_ci_low": 0.0,
+      "tpr_at_fpr_0.001_ci_high": 0.0045
+    }
+  ]
+}

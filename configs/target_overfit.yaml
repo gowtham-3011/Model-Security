@@ -1,0 +1,15 @@
+# Deliberately leaky target: many epochs, zero regularization. This is the
+# model we EXPECT membership inference to work well against — it's the
+# positive control for the whole lab.
+extends: base.yaml
+run_name: target_overfit
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  epochs: 60
+  lr: 0.001
+  weight_decay: 0.0
+  early_stopping_patience: null

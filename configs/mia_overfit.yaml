@@ -1,0 +1,25 @@
+# Run all MIA attacks against the deliberately-leaky target.
+# The model/train sections must match how the target was trained: the shadow
+# attacks assume the attacker knows the target's recipe, and the features they
+# learn are specific to it.
+extends: base.yaml
+target_run_name: target_overfit
+
+model:
+  name: simple_cnn
+  dropout: 0.0
+
+train:
+  epochs: 60
+  lr: 0.001
+  weight_decay: 0.0
+
+shadow:
+  num_shadows: 8          # Shokri's attack saturates quickly; 8 is a reasonable floor
+  shadow_train_size: 8000 # match the target's training-set size
+  classifier: random_forest
+
+lira:
+  num_shadows: 16         # LiRA needs more: each example needs enough IN *and* OUT samples
+  in_fraction: 0.5
+  variance_mode: global   # per-example variance is too noisy below ~64 shadows
